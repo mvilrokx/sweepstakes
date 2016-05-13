@@ -5,10 +5,12 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
 
   body(class='#{bodyClasses}')
-    .border-bottom.border-blue.p1
-      if isLoggedIn
-        a.blue.text-decoration-none(href='/users/logout')  Logout
-      else
-        a.blue.text-decoration-none(href='/users/login')  Login
+    .border-bottom.border-blue.p1.clearfix
+      .right
+        if isLoggedIn
+          a.blue.bold.text-decoration-none.pr3(href='/entries')  My Entries
+          a.blue.bold.text-decoration-none(href='/users/logout')  Logout
+        else
+          a.blue.bold.text-decoration-none(href='/users/login')  Login
 
     block content

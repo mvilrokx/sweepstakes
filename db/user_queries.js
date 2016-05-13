@@ -15,10 +15,11 @@ const findByEmail = (email) => {
 }
 
 const insertUser = (user) => {
-  console.log('userqueries User', user)
   return users().returning('id').insert({
     password: generateHash(user.password),
-    email: user.email
+    email: user.email,
+    created_at: knex.fn.now(),
+    updated_at: knex.fn.now()
   })
 }
 

@@ -1,4 +1,4 @@
-h1 #{action.charAt(0).toUpperCase() + action.slice(1)}
+h1.navy #{action.charAt(0).toUpperCase() + action.slice(1)}
 
 if message.length > 0
   p.p2.border.border-red.red.rounded= message
@@ -10,4 +10,5 @@ form(action='/users/#{action}', method='post')
   div
     label.label Password
     input.input(type='password', name='password')
-  button.btn.btn-outline.blue(type='submit') #{action.charAt(0).toUpperCase() + action.slice(1)}
+  div
+    button.btn.btn-outline.blue(type='submit') #{action.charAt(0).toUpperCase() + action.slice(1)}

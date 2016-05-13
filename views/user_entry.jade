@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .p2.col-12.sm-col-12.md-col-8.lg-col-6.mx-auto
+
+    h1.navy Update Entry
+
+    form(action='/entries/#{entry.user_entry_id}', method='POST', enctype='application/x-www-form-urlencoded')
+      div
+        label.label Your Entry's Name
+        input.input(type='text', name='name', value='#{entry.user_entry_name}')
+        label.label Tournament
+        input.input.muted(type='text', name='name', value='#{entry.tournament_name}', disabled=true)
+        input(type='hidden' name='_method' value='PUT')
+
+      div
+        button.btn.btn-outline.blue(type='submit') Save
+        a.btn.btn-outline.red(href='/entries').right Cancel

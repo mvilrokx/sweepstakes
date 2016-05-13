@@ -29,14 +29,12 @@ module.exports = (passport) => {
       process.nextTick(() => {
         userQueries.findByEmail(email)
           .then((user) => {
-            console.log('user', user)
             if (user[0]) {
               return done(null, false, req.flash('signupMessage', 'That email is already taken.'))
             } else {
               // create the user
               userQueries.insertUser({email, password})
                 .then((user) => {
-                  console.log('user[0]', user[0])
                   return done(null, user[0])
                 })
                 .catch((err) => {
@@ -58,7 +56,6 @@ module.exports = (passport) => {
     (req, email, password, done) => {
       userQueries.findByEmail(email)
         .then((user) => {
-          console.log('user', user)
           if (!user[0]) {
             return done(null, false, req.flash('loginMessage', 'No user found with that email.'))
           }

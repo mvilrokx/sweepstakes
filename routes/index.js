@@ -2,8 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Express', isLoggedIn: req.isAuthenticated() })
-// res.render('index', { title: 'Express' })
+  res.render('index', { title: 'Sweepstakes', isLoggedIn: req.isAuthenticated(), user: req.user })
 })
 
 module.exports = router

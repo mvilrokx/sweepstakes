@@ -8,7 +8,8 @@ const isLoggedIn = (req, res, next) => {
 
 const userRoutes = (passport) => {
   router.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/',
+    // successRedirect: '/',
+    successRedirect: '/entries',
     failureRedirect: '/users/signup',
     failureFlash: true // allow flash messages
   }))
@@ -18,7 +19,8 @@ const userRoutes = (passport) => {
   })
 
   router.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/',
+    // successRedirect: '/',
+    successRedirect: '/entries',
     failureRedirect: '/users/login',
     failureFlash: true
   }))

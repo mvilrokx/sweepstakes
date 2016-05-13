@@ -18,7 +18,6 @@ const transformGroups = (tournament_groups) => {
 router.get('/:tournament_id/groups', (req, res, next) => {
   queries.tournamentGroups(req.params.tournament_id)
     .then((tournament_groups) => {
-      console.log(tournament_groups)
       res.status(200).json(transformGroups(tournament_groups))
     })
     .catch((error) => {

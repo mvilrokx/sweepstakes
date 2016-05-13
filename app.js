@@ -7,6 +7,7 @@ const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+const methodOverride = require('method-override')
 
 const routes = require('./routes/index')
 const users = require('./routes/users')(passport)
@@ -15,6 +16,7 @@ const tournaments = require('./routes/tournaments')
 const tournament_groups = require('./routes/tournament_groups')
 const countries = require('./routes/countries')
 const fixtures = require('./routes/fixtures')
+const user_entries = require('./routes/user_entries')
 
 const app = express()
 
@@ -34,13 +36,22 @@ app.use(passport.initialize())
 app.use(passport.session()) // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-// uncomment after placing your favicon in /public
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+
+// This is to handle PUT and DELETE request
+app.use(methodOverride((req, res) => {
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    // look in urlencoded POST bodies and delete it
+    const method = req.body._method
+    delete req.body._method
+    return method
+  }
+}))
 
 app.use('/', routes)
 app.use('/users', users)
@@ -49,6 +60,7 @@ app.use('/tournaments', tournaments)
 app.use('/tournaments', tournament_groups)
 app.use('/countries', countries)
 app.use('/tournaments', fixtures)
+app.use('/entries', user_entries)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

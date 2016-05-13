@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  .p2.col-12.sm-col-12.md-col-8.lg-col-6.mx-auto
+
+    h1.navy Create New Entry
+
+    form(action='/entries', method='post')
+      div
+        label.label Your Entry's Name
+        input.input(type='text', name='name')
+      div
+        label.label Tournament
+        select.select(name='tournament_id')
+          each tournament in tournaments
+            option(value='#{tournament.id}') #{tournament.name}
+      div
+        button.btn.btn-outline.blue(type='submit') Save
+        a.btn.btn-outline.red(href='/entries').right Cancel
