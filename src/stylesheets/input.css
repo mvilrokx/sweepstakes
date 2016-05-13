@@ -1,6 +1,12 @@
 @import 'basics';
 @import 'basscss';
-@import 'basscss-colors';
 @import 'basscss-background-colors';
+@import 'basscss-border-colors';
+@import 'basscss-btn';
+@import 'basscss-btn-primary';
+@import 'basscss-btn-outline';
+@import 'basscss-btn-sizes';
+@import 'basscss-colors';
 @import 'basscss-darken';
+@import 'basscss-forms';
 @import 'basscss-lighten';

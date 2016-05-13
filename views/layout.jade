@@ -3,5 +3,12 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+
   body(class='#{bodyClasses}')
+    .border-bottom.border-blue.p1
+      if isLoggedIn
+        a.blue.text-decoration-none(href='/users/logout')  Logout
+      else
+        a.blue.text-decoration-none(href='/users/login')  Login
+
     block content

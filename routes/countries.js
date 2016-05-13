@@ -1,7 +1,6 @@
-const express = require('express')
-const router = express.Router()
+const router = require('express').Router()
 
-var knex = require('../db/knex.js')
+const knex = require('../db/knex.js')
 
 router.get('/', (req, res, next) => {
   knex('countries').select()

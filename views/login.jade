@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  .p2.col-12.sm-col-12.md-col-8.lg-col-6.mx-auto
+    - var action = 'login'
+    include _signin_form
+
+    p Already have an account?
+      a(href='/users/signup')  Signup

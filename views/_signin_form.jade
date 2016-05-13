@@ -1,0 +1,13 @@
+h1 #{action.charAt(0).toUpperCase() + action.slice(1)}
+
+if message.length > 0
+  p.p2.border.border-red.red.rounded= message
+
+form(action='/users/#{action}', method='post')
+  div
+    label.label Email
+    input.input(type='text', name='email')
+  div
+    label.label Password
+    input.input(type='password', name='password')
+  button.btn.btn-outline.blue(type='submit') #{action.charAt(0).toUpperCase() + action.slice(1)}

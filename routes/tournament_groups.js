@@ -1,5 +1,4 @@
-const express = require('express')
-const router = express.Router()
+const router = require('express').Router()
 
 const queries = require('../db/tournament_group_queries.js')
 
@@ -19,6 +18,7 @@ const transformGroups = (tournament_groups) => {
 router.get('/:tournament_id/groups', (req, res, next) => {
   queries.tournamentGroups(req.params.tournament_id)
     .then((tournament_groups) => {
+      console.log(tournament_groups)
       res.status(200).json(transformGroups(tournament_groups))
     })
     .catch((error) => {
