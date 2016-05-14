@@ -6,6 +6,7 @@ const userEntries = () => {
 
 const getUserEntry = (user, entry_id) => {
   return userEntries().select(
+    'tournaments.id as tournament_id',
     'tournaments.name as tournament_name',
     'user_entries.id as user_entry_id',
     'user_entries.name as user_entry_name'
@@ -25,8 +26,6 @@ const getUserEntries = (user) => {
 }
 
 const deleteUserEntry = (user, entry_id) => {
-  console.log('user', user)
-  console.log('entry_id', entry_id)
   return userEntries().del().where({id: entry_id, user_id: user.id})
 }
 

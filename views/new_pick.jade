@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  .p2.col-12.sm-col-12.md-col-8.lg-col-6.mx-auto
+
+    h1.navy Pick a team to add it to your entry called '#{entry.user_entry_name}'
+
+    if tournamentGroups && tournamentGroups.length > 0
+      form(action='/entries/#{entry.user_entry_id}/picks', method='post')
+        .flex.flex-wrap
+          each team in tournamentGroups
+            .col-6.sm-col-6.md-col-4.lg-col-4.p1
+              input(
+                type='radio',
+                name='participant_id',
+                value='#{team.tournament_participant_id}',
+                disabled=existing_picks.find((existing_pick) => {return existing_pick.country_code === team.country_code}),
+                id='#{team.country_code}',
+                class=typeof(existing_picks.find((existing_pick) => {return existing_pick.country_code === team.country_code})) === 'undefined' ? undefined : 'muted red'
+              )
+              label.pl1(
+                for='#{team.country_code}',
+                class=typeof(existing_picks.find((existing_pick) => {return existing_pick.country_code === team.country_code})) === 'undefined' ? undefined : 'muted red'
+              ) #{team.country_name}
+
+        div
+          button.btn.btn-outline.blue(type='submit') Save
+          a.btn.btn-outline.red(href='/entries').right Cancel
+
+

@@ -5,7 +5,41 @@ block content
 
     h1.navy Update Entry
 
-    form(action='/entries/#{entry.user_entry_id}', method='POST', enctype='application/x-www-form-urlencoded')
+    .picks.mb2.flex.flex-wrap.content-center
+      -var size = '5em'
+      //- TODO: This should probably by stored somewhere more 'global'
+      -var maxPicks = 8
+      -var i = 0
+
+      if picks && picks.length > 0
+        each pick in picks
+          - i++
+          .pick.col-6.sm-col-4.md-col-3.p1.pb3.center.flex.flex-column.justify-center
+            span.bold= pick.country_name
+            a(href='/entries/#{entry.user_entry_id}/picks/#{pick.pick_id}', style={
+              width:'#{size}',
+              height:'#{size}',
+              'line-height': '#{size}',
+              'text-align': 'center',
+              'background-image': 'url(#{pick.flag_url})',
+              'background-size': 'cover',
+              'background-repeat': 'no-repeat',
+              'background-position': 'center',
+              'border-radius': '50%'}).border.border-gray.mx-auto
+            form(action='/entries/#{entry.user_entry_id}/picks/#{pick.pick_id}', method='post')
+              input(type='hidden' name='_method' value='delete')
+              input.btn.btn-small.btn-narrow.btn-outline.red(type='submit' value='delete', title='delete')
+
+      - for (; i < maxPicks; i++)
+        .pick.col-6.sm-col-4.md-col-3.p1.pb3.center.flex.flex-column.justify-center
+          a(href='/entries/#{entry.user_entry_id}/picks/new', style={
+            width:'#{size}',
+            height:'#{size}',
+            'line-height': '#{size}',
+            'text-align': 'center',
+            'border-radius': '50%'}).border.border-blue.mx-auto Pick
+
+    form(action='/entries/#{entry.user_entry_id}', method='POST')
       div
         label.label Your Entry's Name
         input.input(type='text', name='name', value='#{entry.user_entry_name}')

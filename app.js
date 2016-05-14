@@ -17,6 +17,7 @@ const tournament_groups = require('./routes/tournament_groups')
 const countries = require('./routes/countries')
 const fixtures = require('./routes/fixtures')
 const user_entries = require('./routes/user_entries')
+const entry_picks = require('./routes/entry_picks')
 
 const app = express()
 
@@ -61,6 +62,7 @@ app.use('/tournaments', tournament_groups)
 app.use('/countries', countries)
 app.use('/tournaments', fixtures)
 app.use('/entries', user_entries)
+app.use('/entries', entry_picks)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

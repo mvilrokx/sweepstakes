@@ -2,16 +2,18 @@ extends layout
 
 block content
   .p2.col-12.sm-col-12.md-col-8.lg-col-6.mx-auto
-    h2.blue #{user.email}'s Entries
+    h1.navy #{user.email}'s Entries
 
-    hr
+    .my4
+      if entries && entries.length > 0
+        each entry in entries
+          .mb2
+            form.inline(action='/entries/#{entry.user_entry_id}', method='post')
+              input(type='hidden' name='_method' value='delete')
+              input.btn.btn-outline.btn-small.red(type='submit' value='delete')
+            a.ml1(href='/entries/#{entry.user_entry_id}') #{entry.user_entry_name} (#{entry.tournament_name})
+      else
+        span You have no entries yet,&nbsp
+          a(href='/entries/new') create 1 now
 
-    if entries
-      each entry in entries
-        .mb2
-          form.inline(action='/entries/#{entry.user_entry_id}', method='post')
-            input(type='hidden' name='_method' value='delete')
-            input.btn.btn-outline.btn-small.red(type='submit' value='delete')
-          a.ml2(href='/entries/#{entry.user_entry_id}') #{entry.user_entry_name} (#{entry.tournament_name})
-    br
     a.btn.btn-outline.blue(href='/entries/new') Add New Entry

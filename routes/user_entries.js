@@ -2,6 +2,7 @@ const router = require('express').Router()
 
 const userEntriesQueries = require('../db/user_entries_queries.js')
 const tournamentQueries = require('../db/tournament_queries.js')
+const entryPickQueries = require('../db/entry_pick_queries.js')
 
 const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) return next()
@@ -48,18 +49,26 @@ router.post('/', isLoggedIn, (req, res, next) => {
 })
 
 /***
-*  Get 1 User Entry
+*  Get 1 User Entry (and it's picks, if any)
 */
 router.get('/:entry_id', isLoggedIn, (req, res, next) => {
   userEntriesQueries.getUserEntry(req.user, req.params.entry_id)
     .then((entry) => {
-      res.format({
-        json: () => {
-          res.status(200).json(entry[0])},
-        html: () => {
-          res.render('user_entry', { isLoggedIn: req.isAuthenticated(), user: req.user, entry: entry[0]})
-        }
-      })
+      console.log('entry', entry)
+      entryPickQueries.getEntryPicks(req.user, entry[0].user_entry_id)
+        .then((picks) => {
+          console.log('picks', picks)
+          res.format({
+            json: () => {
+              res.status(200).json(entry[0])},
+            html: () => {
+              res.render('user_entry', { isLoggedIn: req.isAuthenticated(), user: req.user, entry: entry[0], picks: picks})
+            }
+          })
+        })
+        .catch((error) => {
+          next(error)
+        })
     })
     .catch((error) => {
       next(error)

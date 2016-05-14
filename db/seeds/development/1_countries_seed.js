@@ -2,16 +2,17 @@ const request = require('request')
 
 const insertCountry = (knex, country) => {
   return knex('countries').insert({
-    code: country.isoAlpha3,
+    isoAlpha3: country.isoAlpha3,
+    code: country.countryCode,
     name: country.countryName
   })
 }
 
 const nonCountries = [
-  {countryName: 'England', isoAlpha3: 'ENG'},
-  {countryName: 'Northern Ireland', isoAlpha3: 'NIR'},
-  {countryName: 'Scotland', isoAlpha3: 'SCO'},
-  {countryName: 'Wales', isoAlpha3: 'WAL'}
+  {countryName: 'England', isoAlpha3: 'ENG', countryCode: 'EL'},
+  {countryName: 'Northern Ireland', isoAlpha3: 'NIR', countryCode: 'ND'},
+  {countryName: 'Scotland', isoAlpha3: 'SCO', countryCode: 'OL'},
+  {countryName: 'Wales', isoAlpha3: 'WAL', countryCode: 'WL'}
 ]
 
 exports.seed = (knex, Promise) => {
