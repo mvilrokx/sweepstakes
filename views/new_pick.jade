@@ -7,6 +7,7 @@ block content
 
     if tournamentGroups && tournamentGroups.length > 0
       form(action='/entries/#{entry.user_entry_id}/picks', method='post')
+        input(type='hidden', name='position', value='#{position}')
         .flex.flex-wrap
           each team in tournamentGroups
             .col-6.sm-col-6.md-col-4.lg-col-4.p1

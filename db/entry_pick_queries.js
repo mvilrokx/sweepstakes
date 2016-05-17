@@ -13,6 +13,7 @@ const getEntryPicks = (user, user_entry_id) => {
       'tournament_participants.country_code',
       'countries.code as flag_code',
       'countries.name as country_name',
+      'entry_picks.position',
       knex.raw("'http://www.geonames.org/flags/x/' || lower(countries.code) || '.gif'  as flag_url"))
     .where({user_id: user.id, user_entry_id: user_entry_id})
     .join('tournament_participants', 'entry_picks.tournament_participant_id', 'tournament_participants.id')
@@ -25,6 +26,7 @@ const insertEntryPick = (pick) => {
     user_id: pick.user.id,
     user_entry_id: pick.entry_id,
     tournament_participant_id: pick.tournament_participant_id,
+    position: pick.position,
     created_at: knex.fn.now(),
     updated_at: knex.fn.now()
   })
