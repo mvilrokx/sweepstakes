@@ -1,10 +1,18 @@
 const request = require('request')
 
 const insertCountry = (knex, country) => {
-  return knex('countries').insert({
+  return knex('countries').returning('name').insert({
     isoAlpha3: country.isoAlpha3,
     code: country.countryCode,
     name: country.countryName
+  }).then((country) => {
+    console.log(`Successfully inserted Country ${country[0]}`)
+  }).catch((error) => {
+    if (error.code === '23505' && error.constraint === 'countries_pkey') {
+      console.log(`Country ${country.countryName} already exists`)
+    } else {
+      console.log('error', error)
+    }
   })
 }
 

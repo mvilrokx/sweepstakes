@@ -4,6 +4,7 @@ exports.up = (knex, Promise) => {
     table.string('name', 3).notNullable()
     table.integer('tournament_id').references('tournaments.id')
     table.boolean('finished').notNullable().defaultTo(false)
+    table.unique(['tournament_id', 'name'], 'uniqueTournamentGroup') // A group can only exist once in a tournament
   })
 }
 

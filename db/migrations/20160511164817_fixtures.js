@@ -6,6 +6,7 @@ exports.up = (knex, Promise) => {
     table.integer('away').references('tournament_participants.id').notNullable()
     table.timestamp('kickoff').notNullable()
     table.json('result')
+    table.unique(['home', 'away', 'kickoff'], 'uniqueFixture') // teams can only play each other once at the same time
   })
 }
 
