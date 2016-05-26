@@ -60,7 +60,8 @@ router.get('/:tournament_id', (req, res, next) => {
         tourny.entries[i].totalPoints = totalPoints
       })
       // res.status(200).json(tourny)
-      res.render('leaderboard', {tournament: tourny})
+      res.render('leaderboard', {isLoggedIn: req.isAuthenticated(), user: req.user, tournament: tourny})
+    // res.render('user_entries', { isLoggedIn: req.isAuthenticated(), user: req.user, entries: entries})
     })
     .catch((err) => {
       next(err)
