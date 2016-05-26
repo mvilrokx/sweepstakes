@@ -13,7 +13,7 @@ block content
 
       - for (var i = 0; i < maxPicks; i++)
         .pick.col-6.sm-col-4.md-col-3.p1.pb3.center.flex.flex-column.justify-center
-          - var pick = picks.find(function(p) {console.log("pick", p); return p.position === i + 1})
+          - var pick = picks.find(function(p) {return p.position === i + 1})
           if pick
             span.bold= i + 1 + ' ' + pick.country_name
             a(href='/entries/#{entry.user_entry_id}/picks/#{pick.pick_id}', style={
