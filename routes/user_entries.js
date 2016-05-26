@@ -1,7 +1,7 @@
 const router = require('express').Router()
 
 const userEntriesQueries = require('../db/user_entries_queries.js')
-const tournamentQueries = require('../db/tournament_queries.js')
+const Tournament = require('../models/tournament.js')
 const entryPickQueries = require('../db/entry_pick_queries.js')
 
 const isLoggedIn = (req, res, next) => {
@@ -26,9 +26,10 @@ router.delete('/:entry_id', isLoggedIn, (req, res, next) => {
 *  CREATE a new User Entries
 */
 router.get('/new', isLoggedIn, (req, res, next) => {
-  tournamentQueries.allTournaments()
+  new Tournament().fetchAll()
     .then((tournaments) => {
-      res.render('new_user_entry', { isLoggedIn: req.isAuthenticated(), user: req.user, tournaments: tournaments})
+      console.log('tournaments', tournaments.toJSON())
+      res.render('new_user_entry', { isLoggedIn: req.isAuthenticated(), user: req.user, tournaments: tournaments.toJSON()})
     })
     .catch((error) => {
       next(error)

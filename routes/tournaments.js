@@ -1,32 +1,35 @@
 const router = require('express').Router()
 
-const queries = require('../db/tournament_queries.js')
+const Tournament = require('../models/tournament.js')
 
-const addChildUrl = (tournaments, req) => {
-  tournaments.forEach((tournament) => {
-    tournament.groups_url = `${req.protocol}://${req.get('host')}/tournaments/${tournament.id}/groups`
-    tournament.fixtures_url = `${req.protocol}://${req.get('host')}/tournaments/${tournament.id}/fixtures`
-  })
-  return tournaments
-}
+// TODO: Add this to the model somehow
+// const addChildUrl = (tournaments, req) => {
+//   tournaments.forEach((tournament) => {
+//     tournament.groups_url = `${req.protocol}://${req.get('host')}/tournaments/${tournament.id}/groups`
+//     tournament.fixtures_url = `${req.protocol}://${req.get('host')}/tournaments/${tournament.id}/fixtures`
+//   })
+//   return tournaments
+// }
 
 router.get('/:tournament_id', (req, res, next) => {
-  queries.tournamentById(req.params.tournament_id)
-    .then((tournaments) => {
-      res.status(200).json(addChildUrl(tournaments, req)[0])
+  new Tournament({id: req.params.tournament_id}).fetch()
+    .then((tournament) => {
+      // res.status(200).json(addChildUrl([tournaments.toJSON()], req)[0])
+      res.status(200).json(tournament.toJSON())
     })
-    .catch((error) => {
-      next(error)
+    .catch((err) => {
+      next(err)
     })
 })
 
 router.get('/', (req, res, next) => {
-  queries.allTournaments()
+  new Tournament().fetchAll()
     .then((tournaments) => {
-      res.status(200).json(addChildUrl(tournaments, req))
+      // res.status(200).json(addChildUrl(tournaments.toJSON(), req))
+      res.status(200).json(tournaments.toJSON())
     })
-    .catch((error) => {
-      next(error)
+    .catch((err) => {
+      next(err)
     })
 })
 

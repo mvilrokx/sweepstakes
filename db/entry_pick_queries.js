@@ -5,8 +5,6 @@ const entryPicks = () => {
 }
 
 const getEntryPicks = (user, user_entry_id) => {
-  console.log('user', user)
-  console.log('user_entry_id', user_entry_id)
   return entryPicks()
     .select(
       'entry_picks.id as pick_id',
@@ -21,7 +19,6 @@ const getEntryPicks = (user, user_entry_id) => {
 }
 
 const insertEntryPick = (pick) => {
-  console.log('pick', pick)
   return entryPicks().insert({
     user_id: pick.user.id,
     user_entry_id: pick.entry_id,

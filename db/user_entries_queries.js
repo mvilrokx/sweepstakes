@@ -43,4 +43,9 @@ const insertUserEntry = (entry) => {
   })
 }
 
-module.exports = {getUserEntry, getUserEntries, deleteUserEntry, insertUserEntry, updateUserEntry}
+module.exports = {
+  getUserEntry,
+  getUserEntries,
+  deleteUserEntry,
+  insertUserEntry,
+updateUserEntry}

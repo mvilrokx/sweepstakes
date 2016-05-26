@@ -11,7 +11,7 @@ const userRoutes = (passport) => {
     // successRedirect: '/',
     successRedirect: '/entries',
     failureRedirect: '/users/signup',
-    failureFlash: true // allow flash messages
+    failureFlash: true
   }))
 
   router.get('/signup', (req, res) => {

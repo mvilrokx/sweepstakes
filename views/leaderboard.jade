@@ -1,6 +1,25 @@
 extends layout
 
 block content
-  div.bg-green
-    h1= "Leaderboard"
-    p Welcome to #{title}
+    h1.center Leaderboard for #{tournament['name']}
+
+    ol
+      //- TODO: Order by points
+      each entry in tournament.entries.sort(function (entryA, entryB) {return entryB.totalPoints - entryA.totalPoints })
+        li
+          div(style={'margin-top':'-1.49em'}).clearfix
+            div.col.col-4
+              = entry['name'] + ' (' + entry['user']['email'] + ') '
+            div.col.col-7
+              ol.list-reset.m0
+                //- TODO: This should probably by stored somewhere more 'global'
+                - var maxPicks = 8
+                - for (var i = 0; i < maxPicks; i++)
+                  - var pick = entry.picks.find(function(p) {return p.position === i + 1})
+                  li.inline-block.mr1.col-1
+                    if pick
+                      = pick['tournamentParticipant']['country_code']
+                    else
+                      ???
+            div.col.col-1
+              = entry.totalPoints
