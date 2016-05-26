@@ -28,7 +28,6 @@ router.delete('/:entry_id', isLoggedIn, (req, res, next) => {
 router.get('/new', isLoggedIn, (req, res, next) => {
   new Tournament().fetchAll()
     .then((tournaments) => {
-      console.log('tournaments', tournaments.toJSON())
       res.render('new_user_entry', { isLoggedIn: req.isAuthenticated(), user: req.user, tournaments: tournaments.toJSON()})
     })
     .catch((error) => {
@@ -55,10 +54,8 @@ router.post('/', isLoggedIn, (req, res, next) => {
 router.get('/:entry_id', isLoggedIn, (req, res, next) => {
   userEntriesQueries.getUserEntry(req.user, req.params.entry_id)
     .then((entry) => {
-      console.log('entry', entry)
       entryPickQueries.getEntryPicks(req.user, entry[0].user_entry_id)
         .then((picks) => {
-          console.log('picks', picks)
           res.format({
             json: () => {
               res.status(200).json(entry[0])},

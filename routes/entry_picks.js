@@ -13,8 +13,6 @@ const isLoggedIn = (req, res, next) => {
 *  CREATE a new Entry Pick
 */
 router.get('/:entry_id/picks/new', isLoggedIn, (req, res, next) => {
-  console.log('req.params', req.params)
-  console.log('req.query', req.query)
 
   userEntriesQueries.getUserEntry(req.user, req.params.entry_id)
     .then((userEntry) => {

@@ -15,22 +15,6 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/:tournament_id', (req, res, next) => {
-  // new Fixture().fetchAll()
-  //   .then((fixtures) => {
-  //     console.log('fixtures.toJSON()', fixtures.toJSON())
-  //   })
-
-  // new TournamentParticipant().fetchAll()
-  //   .then((tournamentParticipants) => {
-  //     // console.log('tournamentParticipants', tournamentParticipants)
-  //     console.log('tournamentParticipants.toJSON()', tournamentParticipants.toJSON())
-  //   // _.values(tournamentParticipants).forEach((tournamentParticipant) => {
-  //   //   // tournamentParticipants.forEach((tournamentParticipant) => {
-  //   //   console.log('tournamentParticipant', tournamentParticipant)
-  //   //   console.log('tournamentParticipant.points()', tournamentParticipant.points())
-  //   // })
-  //   })
-
   new Tournament({id: req.params.tournament_id})
     .fetch({withRelated: [
         'entries',
@@ -61,7 +45,6 @@ router.get('/:tournament_id', (req, res, next) => {
       })
       // res.status(200).json(tourny)
       res.render('leaderboard', {isLoggedIn: req.isAuthenticated(), user: req.user, tournament: tourny})
-    // res.render('user_entries', { isLoggedIn: req.isAuthenticated(), user: req.user, entries: entries})
     })
     .catch((err) => {
       next(err)

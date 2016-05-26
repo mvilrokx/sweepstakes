@@ -4,6 +4,7 @@ block content
   .p2.col-12.sm-col-12.md-col-8.lg-col-6.mx-auto
 
     h1.navy Update Entry
+    p.caps.h6.orange.bold Order determines multiplier so order is important!
 
     .picks.mb2.flex.flex-wrap.content-center
       -var size = '5em'
@@ -34,7 +35,7 @@ block content
               height:'#{size}',
               'line-height': '#{size}',
               'text-align': 'center',
-              'border-radius': '50%'}).border.border-blue.mx-auto Pick
+              'border-radius': '50%'}).border.border-blue.mx-auto Pick ##{i+1}
 
     form(action='/entries/#{entry.user_entry_id}', method='POST')
       div
