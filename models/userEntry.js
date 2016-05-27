@@ -9,10 +9,10 @@ const UserEntry = bookshelf.Model.extend({
   tableName: 'user_entries',
   hasTimestamps: true,
   tournament: function () {
-    return this.belongsTo('Tournament', 'tournament_id')
+    return this.belongsTo('Tournament')
   },
   user: function () {
-    return this.belongsTo('User', 'user_id')
+    return this.belongsTo('User')
   },
   picks: function () {
     return this.hasMany('EntryPick')

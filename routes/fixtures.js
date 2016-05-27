@@ -1,6 +1,13 @@
 const router = require('express').Router()
 
 const Fixture = require('../models/fixture.js')
+const User = require('../models/user.js')
+
+// route middleware to make sure a user is logged in
+const isLoggedIn = (req, res, next) => {
+  if (req.isAuthenticated()) return next()
+  res.redirect('/')
+}
 
 router.get('/:tournament_id/fixtures/:fixture_id', (req, res, next) => {
   new Fixture({tournament_id: req.params.tournament_id, id: req.params.fixture_id})
@@ -8,15 +15,35 @@ router.get('/:tournament_id/fixtures/:fixture_id', (req, res, next) => {
       withRelated: ['home', 'away', 'home.country', 'away.country']
     })
     .then((fixture) => {
-      res.status(200).json(fixture.toJSON())
+      res.render('update_fixture', {isLoggedIn: req.isAuthenticated(), user: req.user, fixture: fixture.toJSON()})
+    // res.status(200).json(fixture.toJSON())
     })
     .catch((error) => {
       next(error)
     })
 })
 
+/***
+*  UPDATE fixture (only Admins can do this and you can only update the result)
+*/
+router.put('/:tournament_id/fixtures/:fixture_id', isLoggedIn, (req, res, next) => {
+  new User({id: req.user.id}).fetch()
+    .then((user) => {
+      if (user.admin) {
+        new Fixture({tournament_id: req.params.tournament_id, id: req.params.fixture_id})
+          .save({result: req.body.result})
+          .then((entry) => {
+            res.redirect('/entries')
+          })
+          .catch((error) => {
+            next(error)
+          })
+      }
+    })
+})
+
 router.get('/:tournament_id/fixtures', (req, res, next) => {
-  new Fixture({tournament_id: req.params.tournament_id})
+  new Fixture().query({where: {tournament_id: req.params.tournament_id}})
     .fetchAll({
       withRelated: ['home', 'away', 'home.country', 'away.country']
     })

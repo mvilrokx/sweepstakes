@@ -83,8 +83,10 @@ router.get('/:entry_id', isLoggedIn, (req, res, next) => {
 *  Get ALL User Entries
 */
 router.get('/', isLoggedIn, (req, res, next) => {
-  new UserEntry({user_id: req.user.id}).fetchAll({withRelated: ['tournament']})
+  console.log('req.user.id', req.user.id)
+  new UserEntry().query({where: {user_id: req.user.id}}).fetchAll({withRelated: ['tournament']})
     .then((entries) => {
+      console.log('entries.toJSON()', entries.toJSON())
       res.render('user_entries', { isLoggedIn: req.isAuthenticated(), user: req.user, entries: entries.toJSON()})
     })
     .catch((error) => {

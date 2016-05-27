@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  .p2.col-12.sm-col-12.md-col-8.lg-col-6.mx-auto
+    - console.log(fixture.home.country.name)
+
+    h1.navy Update Fixture #{fixture.home.country.name} vs #{fixture.away.country.name}
+
+    form(action='/entries', method='post')
+      div
+        label.label Result
+        input.input(type='text', name='result')
+      div
+        button.btn.btn-outline.blue(type='submit') Save
+        //- a.btn.btn-outline.red(href='/entries').right Cancel
