@@ -1,5 +1,6 @@
 const router = require('express').Router()
 
+const Tournament = require('../models/tournament.js')
 const Fixture = require('../models/fixture.js')
 const User = require('../models/user.js')
 
@@ -31,7 +32,13 @@ router.put('/:tournament_id/fixtures/:fixture_id', isLoggedIn, (req, res, next) 
     .then((user) => {
       if (user.admin) {
         new Fixture({tournament_id: req.params.tournament_id, id: req.params.fixture_id})
-          .save({result: req.body.result})
+          .save({result: {
+              homeGoals: req.body.homeGoals,
+              awayGoals: req.body.awayGoals,
+              homePenalties: req.body.homePenalties,
+              awayPenalties: req.body.awayPenalties,
+              groupStage: req.body.groupStage || true,
+          }})
           .then((entry) => {
             res.redirect('/entries')
           })
@@ -43,12 +50,13 @@ router.put('/:tournament_id/fixtures/:fixture_id', isLoggedIn, (req, res, next) 
 })
 
 router.get('/:tournament_id/fixtures', (req, res, next) => {
-  new Fixture().query({where: {tournament_id: req.params.tournament_id}})
-    .fetchAll({
-      withRelated: ['home', 'away', 'home.country', 'away.country']
+  new Tournament().query({where: {id: req.params.tournament_id}})
+    .fetch({
+      withRelated: ['fixtures', 'fixtures.home', 'fixtures.away', 'fixtures.home.country', 'fixtures.away.country']
     })
-    .then((fixture) => {
-      res.status(200).json(fixture.toJSON())
+    .then((tournament) => {
+      res.render('fixtures', {isLoggedIn: req.isAuthenticated(), user: req.user, tournament: tournament.toJSON()})
+    // res.status(200).json(tournament.toJSON())
     })
     .catch((error) => {
       next(error)

@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  .p2.col-12.sm-col-12.md-col-8.lg-col-6.mx-auto
+
+    h1.navy Fixture List for #{tournament.name}
+    - console.log(user)
+    if user.admin
+      each fixture in tournament.fixtures.sort(function(fixtureA, fixtureB){return fixtureA.kickoff - fixtureB.kickoff})
+        p #{fixture.home.country.name} vs #{fixture.away.country.name} on #{fixture.kickoff}
+    else
+      You have to be an Admin to see this page.
