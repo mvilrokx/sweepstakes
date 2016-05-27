@@ -14,6 +14,7 @@ module.exports = {
   development: {
     client: 'pg',
     connection: 'postgres://localhost/sweepstakes_development',
+    // debug: true,
     migrations: {
       directory: path.join(__dirname, '/db/migrations')
     },

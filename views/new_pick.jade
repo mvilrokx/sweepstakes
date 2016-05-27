@@ -3,26 +3,26 @@ extends layout
 block content
   .p2.col-12.sm-col-12.md-col-8.lg-col-6.mx-auto
 
-    h1.navy Pick a team to add it to your entry called '#{entry.user_entry_name}'
+    h1.navy Pick a team to add it to your entry called '#{entry.name}'
 
-    if tournamentGroups && tournamentGroups.length > 0
-      form(action='/entries/#{entry.user_entry_id}/picks', method='post')
+    if entry.tournament.participants && entry.tournament.participants.length > 0
+      form(action='/entries/#{entry.id}/picks', method='post')
         input(type='hidden', name='position', value='#{position}')
         .flex.flex-wrap
-          each team in tournamentGroups
+          each team in entry.tournament.participants
             .col-6.sm-col-6.md-col-4.lg-col-4.p1
               input(
                 type='radio',
                 name='participant_id',
-                value='#{team.tournament_participant_id}',
-                disabled=existing_picks.find((existing_pick) => {return existing_pick.country_code === team.country_code}),
-                id='#{team.country_code}',
-                class=typeof(existing_picks.find((existing_pick) => {return existing_pick.country_code === team.country_code})) === 'undefined' ? undefined : 'muted red'
+                value='#{team.id}',
+                disabled=entry.picks.find((existing_pick) => {return existing_pick.tournamentParticipant.country_id === team.country_id}),
+                id='#{team.country_id}',
+                class=typeof(entry.picks.find((existing_pick) => {return existing_pick.tournamentParticipant.country_id === team.country_id})) === 'undefined' ? undefined : 'muted red'
               )
               label.pl1(
-                for='#{team.country_code}',
-                class=typeof(existing_picks.find((existing_pick) => {return existing_pick.country_code === team.country_code})) === 'undefined' ? undefined : 'muted red'
-              ) #{team.country_name}
+                for='#{team.country_id}',
+                class=typeof(entry.picks.find((existing_pick) => {return existing_pick.tournamentParticipant.country_id === team.country_id})) === 'undefined' ? undefined : 'muted red'
+              ) #{team.country.name}
 
         div
           button.btn.btn-outline.blue(type='submit') Save

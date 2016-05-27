@@ -1,14 +1,14 @@
 const router = require('express').Router()
 
-const knex = require('../db/knex.js')
+const Country = require('../models/country.js')
 
 router.get('/', (req, res, next) => {
-  knex('countries').select()
+  new Country().fetchAll()
     .then((countries) => {
-      res.status(200).json(countries)
+      res.status(200).json(countries.toJSON())
     })
-    .catch((error) => {
-      next(error)
+    .catch((err) => {
+      next(err)
     })
 })
 

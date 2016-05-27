@@ -1,3 +1,4 @@
+// TODO: This should really be all in the model, but I didn't know how to do that so left it here for now
 const bookshelf = require('../db/bookshelf')
 
 require('./tournament.js')

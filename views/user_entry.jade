@@ -13,36 +13,36 @@ block content
 
       - for (var i = 0; i < maxPicks; i++)
         .pick.col-6.sm-col-4.md-col-3.p1.pb3.center.flex.flex-column.justify-center
-          - var pick = picks.find(function(p) {return p.position === i + 1})
+          - var pick = entry.picks.find(function(p) {return p.position === i + 1})
           if pick
-            span.bold= i + 1 + ' ' + pick.country_name
-            a(href='/entries/#{entry.user_entry_id}/picks/#{pick.pick_id}', style={
+            span.bold= i + 1 + ' ' + pick.tournamentParticipant.country.name
+            a(href='/entries/#{entry.id}/picks/#{pick.id}', style={
               width:'#{size}',
               height:'#{size}',
               'line-height': '#{size}',
               'text-align': 'center',
-              'background-image': 'url(#{pick.flag_url})', //TODO: Cater for Wales, England ...
+              'background-image': 'url(#{pick.tournamentParticipant.country.flag_url})', //TODO: Cater for Wales, England ...
               'background-size': 'cover',
               'background-repeat': 'no-repeat',
               'background-position': 'center',
               'border-radius': '50%'}).border.border-gray.mx-auto
-            form(action='/entries/#{entry.user_entry_id}/picks/#{pick.pick_id}', method='post')
+            form(action='/entries/#{entry.id}/picks/#{pick.id}', method='post')
               input(type='hidden' name='_method' value='delete')
               input.btn.btn-small.btn-narrow.btn-outline.red(type='submit' value='delete', title='delete')
           else
-            a(href='/entries/#{entry.user_entry_id}/picks/new?position=#{i+1}', style={
+            a(href='/entries/#{entry.id}/picks/new?position=#{i+1}', style={
               width:'#{size}',
               height:'#{size}',
               'line-height': '#{size}',
               'text-align': 'center',
               'border-radius': '50%'}).border.border-blue.mx-auto Pick ##{i+1}
 
-    form(action='/entries/#{entry.user_entry_id}', method='POST')
+    form(action='/entries/#{entry.id}', method='POST')
       div
         label.label Your Entry's Name
-        input.input(type='text', name='name', value='#{entry.user_entry_name}')
+        input.input(type='text', name='name', value='#{entry.name}')
         label.label Tournament
-        input.input.muted(type='text', name='name', value='#{entry.tournament_name}', disabled=true)
+        input.input.muted(type='text', name='name', value='#{entry.tournament.name}', disabled=true)
         input(type='hidden' name='_method' value='PUT')
 
       div

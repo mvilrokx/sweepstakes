@@ -6,8 +6,8 @@ exports.seed = (knex, Promise) => {
       .then((tournament_id) => {
         return Promise.map(tournament.fixtures, (fixture) => {
           return Promise.join(
-            knex.select('id').from('tournament_participants').where({country_code: fixture.home, tournament_id: tournament_id[0].id}),
-            knex.select('id').from('tournament_participants').where({country_code: fixture.away, tournament_id: tournament_id[0].id})
+            knex.select('id').from('tournament_participants').where({country_id: fixture.home, tournament_id: tournament_id[0].id}),
+            knex.select('id').from('tournament_participants').where({country_id: fixture.away, tournament_id: tournament_id[0].id})
           )
             .then((teams) => {
               return knex('fixtures').returning('id').insert({

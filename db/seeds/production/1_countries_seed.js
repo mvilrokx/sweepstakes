@@ -2,7 +2,7 @@ const request = require('request')
 
 const insertCountry = (knex, country) => {
   return knex('countries').returning('name').insert({
-    isoAlpha3: country.isoAlpha3,
+    id: country.isoAlpha3,
     code: country.countryCode,
     name: country.countryName
   }).then((country) => {

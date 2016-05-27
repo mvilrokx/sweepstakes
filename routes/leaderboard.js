@@ -1,6 +1,4 @@
-const express = require('express')
-const router = express.Router()
-const _ = require('lodash')
+const router = require('express').Router()
 
 const Fixture = require('../models/fixture.js')
 const TournamentParticipant = require('../models/tournamentParticipant.js')

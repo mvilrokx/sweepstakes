@@ -18,11 +18,11 @@ const insertTournament = (knex, Promise, tournament) => {
         return Promise.map(tournament.groups[groupName], (participant) => {
           console.log(`Successfully inserted Participant ${participant} into Group ${groupName}`)
           return knex('tournament_participants').insert({
-            country_code: participant,
+            country_id: participant,
             group_id: group_id[0],
             tournament_id: tournament_id[0]
           }).catch((error) => {
-            if (error.code === '23505' && error.constraint === 'tournament_participants_tournament_id_country_code_unique') {
+            if (error.code === '23505' && error.constraint === 'tournament_participants_tournament_id_country_id_unique') {
               console.log(`Participant ${participant} already exists for Tournament ${tournament.name}`)
             } else {
               console.log('error', error)
