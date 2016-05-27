@@ -1,8 +1,18 @@
-const express = require('express')
-const router = express.Router()
+const router = require('express').Router()
+const Tournament = require('../models/tournament.js')
 
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Sweepstakes', isLoggedIn: req.isAuthenticated(), user: req.user })
+  new Tournament().fetchAll()
+    .then((tournaments) => {
+      res.render('index', {
+        isLoggedIn: req.isAuthenticated(),
+        user: req.user,
+        tournaments: tournaments.toJSON()
+      })
+    })
+    .catch((err) => {
+      next(err)
+    })
 })
 
 module.exports = router

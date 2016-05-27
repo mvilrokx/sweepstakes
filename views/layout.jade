@@ -1,11 +1,13 @@
 doctype html
 html
   head
-    title= title
+    title= Sweepstakes
     link(rel='stylesheet', href='/stylesheets/style.css')
 
   body(class='#{bodyClasses}')
     .border-bottom.border-navy.p1.clearfix
+      .left
+        a.navy.bold.text-decoration-none.pr3(href='/') Home
       .right
         if isLoggedIn
           a.navy.bold.text-decoration-none.pr3(href='/entries') My Entries

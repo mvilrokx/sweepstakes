@@ -1,5 +1,17 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1.center.pb4 Leaderboards
+  .h1.clearfix
+    each tournament in tournaments
+      .col.col-6.center
+        a(href='/leaderboard/#{tournament.id}').btn.btn-outline.btn-big.blue #{tournament.name}
+
+  if !isLoggedIn
+    .center.pb4
+      h1.caps or
+    .col.col-12.center.h1
+      a(href='/users/Signup').btn.btn-primary.btn-big Signup Here!
+    .col.col-12.center
+      p Already have an account?
+        a(href='/users/login')  Login
