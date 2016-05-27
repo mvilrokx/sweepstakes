@@ -9,7 +9,7 @@ block content
       form(action='/entries/#{entry.id}/picks', method='post')
         input(type='hidden', name='position', value='#{position}')
         .flex.flex-wrap
-          each team in entry.tournament.participants
+          each team in entry.tournament.participants.sort(function(teamA, teamB){if (teamA.country.name > teamB.country.name) {return 1}; if (teamA.country.name < teamB.country.name); {return -1} return 0;})
             .col-6.sm-col-6.md-col-4.lg-col-4.p1
               input(
                 type='radio',
