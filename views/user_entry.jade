@@ -16,7 +16,8 @@ block content
           - var pick = entry.picks.find(function(p) {return p.position === i + 1})
           if pick
             span.bold= i + 1 + ' ' + pick.tournamentParticipant.country.name
-            a(href='/entries/#{entry.id}/picks/#{pick.id}', style={
+            //- a(href='/entries/#{entry.id}/picks/#{pick.id}', style={
+            span(style={
               width:'#{size}',
               height:'#{size}',
               'line-height': '#{size}',

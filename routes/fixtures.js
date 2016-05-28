@@ -28,25 +28,25 @@ router.get('/:tournament_id/fixtures/:fixture_id', (req, res, next) => {
 *  UPDATE fixture (only Admins can do this and you can only update the result)
 */
 router.put('/:tournament_id/fixtures/:fixture_id', isLoggedIn, (req, res, next) => {
-  new User({id: req.user.id}).fetch()
-    .then((user) => {
-      if (user.admin) {
-        new Fixture({tournament_id: req.params.tournament_id, id: req.params.fixture_id})
-          .save({result: {
-              homeGoals: req.body.homeGoals,
-              awayGoals: req.body.awayGoals,
-              homePenalties: req.body.homePenalties,
-              awayPenalties: req.body.awayPenalties,
-              groupStage: req.body.groupStage || true,
-          }})
-          .then((entry) => {
-            res.redirect('/entries')
-          })
-          .catch((error) => {
-            next(error)
-          })
-      }
-    })
+  if (req.user.admin) {
+    console.log('req.body', req.body)
+    new Fixture({tournament_id: req.params.tournament_id, id: req.params.fixture_id})
+      .save({result: {
+          homeGoals: parseInt(req.body.home_goals, 10),
+          awayGoals: parseInt(req.body.away_goals, 10),
+          homePenalties: parseInt(req.body.home_penalties, 10),
+          awayPenalties: parseInt(req.body.away_penalties, 10),
+          groupStage: (req.body.group_stage && req.body.group_stage === 'true') ? true : false,
+      }})
+      .then((entry) => {
+        res.redirect(`/tournaments/${req.params.tournament_id}/fixtures`)
+      })
+      .catch((error) => {
+        next(error)
+      })
+  } else { // This is in case you are not an Admin, needs a flash message or sometjhinig
+    res.redirect(`/tournaments/${req.params.tournament_id}/fixtures`)
+  }
 })
 
 router.get('/:tournament_id/fixtures', (req, res, next) => {

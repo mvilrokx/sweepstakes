@@ -2,14 +2,37 @@ extends layout
 
 block content
   .p2.col-12.sm-col-12.md-col-8.lg-col-6.mx-auto
-    - console.log(fixture.home.country.name)
 
-    h1.navy Update Fixture #{fixture.home.country.name} vs #{fixture.away.country.name}
+    h1.navy Update Result #{fixture.home.country.name} vs #{fixture.away.country.name}
 
-    form(action='/entries', method='post')
-      div
-        label.label Result
-        input.input(type='text', name='result')
-      div
-        button.btn.btn-outline.blue(type='submit') Save
-        //- a.btn.btn-outline.red(href='/entries').right Cancel
+    if user && user.admin
+      form(action='/tournaments/#{fixture.tournament_id}/fixtures/#{fixture.id}', method='post')
+        input(type='hidden' name='_method' value='PUT')
+        .col.col-12
+          .col.col-6.pr4
+            label.label Goals #{fixture.home.country.name}
+            input.input(type='text', name='home_goals', value='#{fixture.result ? fixture.result.homeGoals : ""}')
+
+          .col.col-6.pr4
+            label.label Goals #{fixture.away.country.name}
+            input.input(type='text', name='away_goals', value='#{fixture.result ? fixture.result.awayGoals : ""}')
+
+          .col.col-12.pb4
+            input(type='checkbox', name='group_stage', id='group_stage_checkbox', value='true', checked=fixture.result && fixture.result.groupStage).mr2
+            label(for='group_stage_checkbox') Group Stage Game
+
+          .italic.orange Use only in the event of a Penalty shootout (i.e. a draw in the elimination rounds):
+          .col.col-6.pr4
+            label.label Penalties #{fixture.home.country.name}
+            input.input(type='text', name='home_penalties', value='#{fixture.result ? (fixture.result.homePenalties == null ? "" : fixture.result.homePenalties): ""}')
+
+          .col.col-6.pr4
+            label.label Penalties #{fixture.away.country.name}
+            input.input(type='text', name='away_penalties', value='#{fixture.result ? (fixture.result.awayPenalties == null ? "" : fixture.result.awayPenalties): ""}')
+
+        .col.col-12
+          button.btn.btn-outline.blue(type='submit') Save
+          a(href='/tournaments/#{fixture.tournament_id}/fixtures').right.btn.btn-outline.red Cancel
+
+    else
+      p.center.red.bold You have to login as an Admin to see this page.
