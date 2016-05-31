@@ -38,12 +38,16 @@ router.post('/', isLoggedIn, (req, res, next) => {
 *  UPDATE User Entries (only the name is updatable)
 */
 router.put('/:entry_id', isLoggedIn, (req, res, next) => {
-  new UserEntry({id: req.params.entry_id, user_id: req.user.id}).save({name: req.body.name})
-    .then((entry) => {
-      res.redirect('/entries')
-    })
-    .catch((error) => {
-      next(error)
+  new UserEntry({user_id: req.user.id, id: req.params.entry_id})
+    .fetch() // Need to do this to be able to check the tournament start date
+    .then((userEntry) => {
+      userEntry.save({name: req.body.name})
+        .then((entry) => {
+          res.redirect('/entries')
+        })
+        .catch((error) => {
+          next(error)
+        })
     })
 })
 
@@ -53,8 +57,8 @@ router.put('/:entry_id', isLoggedIn, (req, res, next) => {
 router.delete('/:entry_id', isLoggedIn, (req, res, next) => {
   new UserEntry({user_id: req.user.id, id: req.params.entry_id})
     .fetch() // Need to do this to be able to check the tournament start date
-    .then((model) => {
-      model.destroy()
+    .then((userEntry) => {
+      userEntry.destroy()
         .then(() => {
           res.redirect('/entries')
         })

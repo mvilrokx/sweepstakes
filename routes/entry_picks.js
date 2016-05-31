@@ -68,13 +68,5 @@ router.delete('/:entry_id/picks/:pick_id', isLoggedIn, (req, res, next) => {
         })
     })
 })
-//   new EntryPick({user_id: req.user.id, id: req.params.pick_id}).destroy()
-//     .then(() => {
-//       res.redirect(`/entries/${req.params.entry_id}`)
-//     })
-//     .catch((error) => {
-//       next(error)
-//     })
-// })
 
 module.exports = router
