@@ -1,7 +1,13 @@
 extends layout
 
+
 block content
-  h1.center.pb3.mb3.border-bottom.border-navy Leaderboard for #{tournament['name']}
+  - var images = ['http://www.ca2016.com/uploads/02/00/Teams_Marquee-1600x_.jpg', 'http://www.ca2016.com/uploads/14/12/HAI_Kervens_Belfort01_-_For_the_Marquee-1600x_.jpeg', 'http://www.ca2016.com/uploads/11/05/Marquee_Image-1600x_.jpg', 'http://img.uefa.com/imgml/2016/euro/common-elements/watermark_x2.png']
+
+  .h1.white(style={
+    'background-image':`url('${images[Math.floor(Math.random() * images.length)]}')`,
+    'text-shadow': '1px 1px 1px #111, -1px 1px 1px #111, -1px -1px 1px #111, 1px -1px 1px #111',
+    'background-repeat':'no-repeat'}).center.p4.bold.border-bottom.border-navy Leaderboard for #{tournament['name']}
 
   - var position = 1
   - var size = '3em'
