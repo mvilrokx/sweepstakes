@@ -43,7 +43,7 @@ router.put('/:tournament_id/fixtures/:fixture_id', isLoggedIn, (req, res, next) 
       .catch((error) => {
         next(error)
       })
-  } else { // This is in case you are not an Admin, needs a flash message or sometjhinig
+  } else { // TODO: This is in case you are not an Admin, needs a flash message or sometjhinig
     res.redirect(`/tournaments/${req.params.tournament_id}/fixtures`)
   }
 })

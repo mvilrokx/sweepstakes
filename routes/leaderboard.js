@@ -19,6 +19,7 @@ router.get('/:tournament_id', (req, res, next) => {
         'entries.picks',
         'entries.user',
         'entries.picks.tournamentParticipant',
+        'entries.picks.tournamentParticipant.country',
         'entries.picks.tournamentParticipant.homeTeams',
         'entries.picks.tournamentParticipant.awayTeams'
       ]

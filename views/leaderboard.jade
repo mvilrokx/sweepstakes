@@ -1,25 +1,35 @@
 extends layout
 
 block content
-    h1.center Leaderboard for #{tournament['name']}
+  h1.center.pb3.mb3.border-bottom.border-navy Leaderboard for #{tournament['name']}
 
-    ol
-      //- TODO: Order by points
-      each entry in tournament.entries.sort(function (entryA, entryB) {return entryB.totalPoints - entryA.totalPoints })
-        li
-          div(style={'margin-top':'-1.49em'}).clearfix
-            div.col.col-4
-              = entry['name'] + ' (' + entry['user']['email'] + ') '
-            div.col.col-7
-              ol.list-reset.m0
-                //- TODO: This should probably by stored somewhere more 'global'
-                - var maxPicks = 8
-                - for (var i = 0; i < maxPicks; i++)
-                  - var pick = entry.picks.find(function(p) {return p.position === i + 1})
-                  li.inline-block.mr1.col-1
-                    if pick
-                      = pick['tournamentParticipant']['country_id']
-                    else
-                      ???
-            div.col.col-1
-              = entry.totalPoints
+  - var position = 1
+  - var size = '3em'
+
+  each entry in tournament.entries.sort(function (entryA, entryB) {return entryB.totalPoints - entryA.totalPoints })
+    .clearfix
+      .col.col-12.align-middle.flex.py1
+        .col.col-1.right-align.pr2.self-center #{position}.
+        .col.col-3.self-center
+          = entry['name'] + ' (' + entry['user']['email'] + ') '
+        .col.col-6.h3.flex.flex-wrap
+          - var maxPicks = 8
+          - for (var i = 0; i < maxPicks; i++)
+            - var pick = entry.picks.find(function(p) {return p.position === i + 1})
+            .bold.center.flex-auto
+              if pick
+                .border.border-gray.white(style={
+                  width:size,
+                  height:size,
+                  'line-height':size,
+                  'text-shadow': '1px 1px 1px #111, -1px 1px 1px #111, -1px -1px 1px #111, 1px -1px 1px #111',
+                  'background-image': 'url(#{pick.tournamentParticipant.country.flag_url})',
+                  'background-size': 'cover',
+                  'background-repeat': 'no-repeat',
+                  'background-position': 'center',
+                  'border-radius': '50%'})= pick['tournamentParticipant']['country_id']
+              else
+                div(style={width:size, height:size, 'line-height':size}) ???
+        div.col.col-1.self-center.right-align.h2.bold
+          = entry.totalPoints
+    - position++
