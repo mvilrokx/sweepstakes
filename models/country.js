@@ -9,7 +9,10 @@ const Country = bookshelf.Model.extend({
   },
   virtuals: {
     flag_url: function () {
-      return `http://www.geonames.org/flags/x/${this.get('code').toLowerCase()}.gif`
+      let flagCode = this.get('code')
+      // To account for these not being real countries
+      if (['EL', 'ND', 'OL', 'WL'].includes(flagCode)) {flagCode = 'GB'}
+      return `http://www.geonames.org/flags/x/${flagCode.toLowerCase()}.gif`
     }
   }
 })
