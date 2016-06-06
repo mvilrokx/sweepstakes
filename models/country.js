@@ -4,11 +4,11 @@ require('./tournamentParticipant.js')
 
 const Country = bookshelf.Model.extend({
   tableName: 'countries',
-  participants: function () {
+  participants() {
     return this.hasMany('TournamentParticipant')
   },
   virtuals: {
-    flag_url: function () {
+    flag_url() {
       let flagCode = this.get('code')
       // To account for these not being real countries
       if (['EL', 'ND', 'OL', 'WL'].includes(flagCode)) {flagCode = 'GB'}

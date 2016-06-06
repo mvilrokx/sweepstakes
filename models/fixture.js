@@ -41,12 +41,12 @@ const calculatePoints = (results, home) => {
 
 const Fixture = bookshelf.Model.extend({
   tableName: 'fixtures',
-  tournament: function () {return this.belongsTo('Tournament') },
-  home: function () {return this.belongsTo('TournamentParticipant', 'home') },
-  away: function () {return this.belongsTo('TournamentParticipant', 'away') },
+  tournament() {return this.belongsTo('Tournament') },
+  home() {return this.belongsTo('TournamentParticipant', 'home') },
+  away() {return this.belongsTo('TournamentParticipant', 'away') },
   virtuals: {
-    homeTeamPoints: function () {return calculatePoints(this.get('result'), true) },
-    awayTeamPoints: function () {return calculatePoints(this.get('result'), false) }
+    homeTeamPoints() {return calculatePoints(this.get('result'), true) },
+    awayTeamPoints() {return calculatePoints(this.get('result'), false) }
   }
 })
 

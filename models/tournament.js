@@ -7,20 +7,20 @@ require('./tournamentParticipant.js')
 
 const Tournament = bookshelf.Model.extend({
   tableName: 'tournaments',
-  groups: function () {
+  groups() {
     return this.hasMany('Group')
   },
-  entries: function () {
+  entries() {
     return this.hasMany('UserEntry', 'tournament_id')
   },
-  fixtures: function () {
+  fixtures() {
     return this.hasMany('Fixture')
   },
-  participants: function () {
+  participants() {
     return this.hasMany('TournamentParticipant')
   },
   virtuals: {
-    hasStarted: function () {return this.get('starts_at') < new Date()}
+    hasStarted() {return this.get('starts_at') < new Date()}
   }
 })
 

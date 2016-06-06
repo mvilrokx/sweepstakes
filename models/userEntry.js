@@ -8,21 +8,21 @@ require('./entryPick.js')
 const UserEntry = bookshelf.Model.extend({
   tableName: 'user_entries',
   hasTimestamps: true,
-  tournament: function () {
+  tournament() {
     return this.belongsTo('Tournament')
   },
-  user: function () {
+  user() {
     return this.belongsTo('User')
   },
-  picks: function () {
+  picks() {
     return this.hasMany('EntryPick')
   },
-  initialize: function () {
+  initialize() {
     this.on('saving', this.beforeSave)
     this.on('destroying', this.beforeSave)
   },
-  beforeSave: function () {
-    return this.tournament().fetch().then(function (tournament) {
+  beforeSave() {
+    return this.tournament().fetch().then((tournament) => {
       if (tournament.get('starts_at') < new Date()) {
         throw new Error('Tournament already started, changes not allowed.')
       }

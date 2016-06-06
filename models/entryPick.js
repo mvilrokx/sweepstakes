@@ -7,20 +7,20 @@ require('./tournamentParticipant.js')
 const EntryPick = bookshelf.Model.extend({
   tableName: 'entry_picks',
   hasTimestamps: true,
-  user: function () {
+  user() {
     return this.belongsTo('User')
   },
-  entry: function () {
+  entry() {
     return this.belongsTo('UserEntry')
   },
-  tournamentParticipant: function () {
+  tournamentParticipant() {
     return this.belongsTo('TournamentParticipant')
   },
-  initialize: function () {
+  initialize() {
     this.on('saving', this.beforeSave)
     this.on('destroying', this.beforeSave)
   },
-  beforeSave: function () {
+  beforeSave() {
     return this.entry().fetch()
       .then((entry) => {
         return entry.tournament().fetch()

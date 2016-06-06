@@ -6,9 +6,7 @@ const User = bookshelf.Model.extend({
   tableName: 'users',
   hasTimestamps: true,
   hidden: ['password'],
-  entries: function () {
-    return this.hasMany('UserEntry')
-  }
+  entries() {return this.hasMany('UserEntry') }
 })
 
 module.exports = bookshelf.model('User', User)
