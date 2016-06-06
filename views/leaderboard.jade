@@ -2,40 +2,44 @@ extends layout
 
 
 block content
-  - var images = ['http://www.ca2016.com/uploads/02/00/Teams_Marquee-1600x_.jpg', 'http://www.ca2016.com/uploads/14/12/HAI_Kervens_Belfort01_-_For_the_Marquee-1600x_.jpeg', 'http://www.ca2016.com/uploads/11/05/Marquee_Image-1600x_.jpg', 'http://img.uefa.com/imgml/2016/euro/common-elements/watermark_x2.png']
+  - var images = ['http://www.ca2016.com/uploads/02/00/Teams_Marquee-1600x_.jpg', 'http://www.ca2016.com/uploads/14/12/HAI_Kervens_Belfort01_-_For_the_Marquee-1600x_.jpeg', 'http://www.ca2016.com/uploads/11/05/Marquee_Image-1600x_.jpg', 'http://img.uefa.com/imgml/2016/euro/common-elements/watermark_x2.png', 'http://www.ca2016.com/uploads/08/10/Ticketing_FAQ_copy-1600x_.jpg', 'http://www.ca2016.com/uploads/08/10/Ticketing_FAQ_copy-1600x_.jpg', 'http://www.ca2016.com/uploads/11/08/Orlando1-1400x_-trim_perc(0.1009,0.5142,0.8802,0.9849).jpg', 'http://www.ca2016.com/uploads/05/05/Centurylink-1400x_-trim_perc(0.0832,0.3221,0.942,0.8726).jpg', 'http://www.ca2016.com/uploads/01/10/Boston2-1400x_-trim_perc(0.1463,0.1791,0.9987,0.7854).jpg', 'http://www.ca2016.com/uploads/15/05/Levi-1400x_-trim_perc(0.0668,0.2332,0.9344,0.7764).jpg', 'http://www.ca2016.com/uploads/14/07/20151120_5565-1400x_-trim_perc(0.053,0.2745,0.9584,0.7766).jpg', 'http://www.ca2016.com/uploads/12/10/Metlife_-_NY_NJ-1400x_-trim_perc(0.169,0.6477,0.9458,1).jpg', 'http://www.ca2016.com/uploads/14/13/Houston-1400x_-trim_perc(0.0101,0.1342,1,0.6919).jpg', 'http://www.ca2016.com/uploads/12/00/20151120_5677-1400x_-trim_perc(0.2156,0.0597,0.7881,0.8308).jpg', 'http://www.ca2016.com/uploads/05/03/20150709_4591-1400x_-trim_perc(0.0416,0.2633,0.9748,0.8011).jpg', 'http://www.ca2016.com/uploads/02/13/Phoenix-1400x_-trim_perc(0,0.2919,1,1).jpg', 'http://www.ca2016.com/uploads/09/15/Rafa_Marquez_Marquee-1200x_.jpg', 'http://www.ca2016.com/uploads/04/13/About-1600x_.jpg']
 
   .h1.white(style={
     'background-image':`url('${images[Math.floor(Math.random() * images.length)]}')`,
+    'background-position': '25% 50%',
+    'background-size': 'cover',
+    'height': '250px',
     'text-shadow': '1px 1px 1px #111, -1px 1px 1px #111, -1px -1px 1px #111, 1px -1px 1px #111',
-    'background-repeat':'no-repeat'}).center.p4.bold.border-bottom.border-navy Leaderboard for #{tournament['name']}
+    'background-repeat':'no-repeat'}).center.p4.mb4.bold.border-bottom.border-navy Leaderboard for #{tournament['name']}
 
   - var position = 1
   - var size = '3em'
 
-  each entry in tournament.entries.sort(function (entryA, entryB) {return entryB.totalPoints - entryA.totalPoints })
-    .clearfix
-      .col.col-12.align-middle.flex.py1
-        .col.col-1.right-align.pr2.self-center #{position}.
-        .col.col-3.self-center
-          = entry['name'] + ' (' + entry['user']['email'] + ') '
-        .col.col-6.h3.flex.flex-wrap
-          - var maxPicks = 8
-          - for (var i = 0; i < maxPicks; i++)
-            - var pick = entry.picks.find(function(p) {return p.position === i + 1})
-            .bold.center.flex-auto
-              if pick
-                .border.border-gray.white(style={
-                  width:size,
-                  height:size,
-                  'line-height':size,
-                  'text-shadow': '1px 1px 1px #111, -1px 1px 1px #111, -1px -1px 1px #111, 1px -1px 1px #111',
-                  'background-image': 'url(#{pick.tournamentParticipant.country.flag_url})',
-                  'background-size': 'cover',
-                  'background-repeat': 'no-repeat',
-                  'background-position': 'center',
-                  'border-radius': '50%'})= pick['tournamentParticipant']['country_id']
-              else
-                div(style={width:size, height:size, 'line-height':size}) ???
-        div.col.col-1.self-center.right-align.h2.bold
-          = entry.totalPoints
-    - position++
+  .col.col-12
+    each entry in tournament.entries.sort(function (entryA, entryB) {return entryB.totalPoints - entryA.totalPoints })
+      .clearfix
+        .col.col-12.align-middle.flex.py1
+          .col.col-1.right-align.pr2.self-center #{position}.
+          .col.col-3.self-center
+            = entry['name'] + ' (' + entry['user']['email'] + ') '
+          .col.col-6.h3.flex.flex-wrap
+            - var maxPicks = 8
+            - for (var i = 0; i < maxPicks; i++)
+              - var pick = entry.picks.find(function(p) {return p.position === i + 1})
+              .bold.center.flex-auto
+                if pick
+                  .border.border-gray.white(style={
+                    width:size,
+                    height:size,
+                    'line-height':size,
+                    'text-shadow': '1px 1px 1px #111, -1px 1px 1px #111, -1px -1px 1px #111, 1px -1px 1px #111',
+                    'background-image': 'url(#{pick.tournamentParticipant.country.flag_url})',
+                    'background-size': 'cover',
+                    'background-repeat': 'no-repeat',
+                    'background-position': 'center',
+                    'border-radius': '50%'})= pick['tournamentParticipant']['country_id']
+                else
+                  div(style={width:size, height:size, 'line-height':size}) ???
+          div.col.col-1.self-center.right-align.h2.bold
+            = entry.totalPoints
+      - position++
