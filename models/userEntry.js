@@ -24,7 +24,6 @@ const UserEntry = bookshelf.Model.extend({
   beforeSave() {
     return this.tournament().fetch().then((tournament) => {
       if (tournament.get('hasStarted')) {
-        // if (tournament.get('starts_at') < new Date()) {
         throw new Error('Tournament already started, changes not allowed.')
       }
     })
