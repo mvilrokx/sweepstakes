@@ -20,7 +20,14 @@ const Tournament = bookshelf.Model.extend({
     return this.hasMany('TournamentParticipant')
   },
   virtuals: {
-    hasStarted() {return this.get('starts_at') < new Date()}
+    // TODO: REMOVE HACK!
+    // hasStarted() {return this.get('starts_at') < new Date()}
+    hasStarted() {
+      if (this.get('name') === 'EURO 2016') {
+        return false
+      } else
+        return true
+    }
   }
 })
 

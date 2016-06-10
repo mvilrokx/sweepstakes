@@ -12,7 +12,9 @@ const isLoggedIn = (req, res, next) => {
 *  CREATE a new User Entries
 */
 router.get('/new', isLoggedIn, (req, res, next) => {
-  new Tournament().where('starts_at', '>', new Date()).fetchAll()
+  // TODO: REMOVE HACK!
+  new Tournament().where('id', 1).fetchAll()
+    // new Tournament().where('starts_at', '>', new Date()).fetchAll()
     .then((tournaments) => {
       res.render('new_user_entry', { isLoggedIn: req.isAuthenticated(), user: req.user, tournaments: tournaments.toJSON()})
     })
