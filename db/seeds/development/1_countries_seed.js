@@ -8,7 +8,8 @@ const insertCountry = (knex, country) => {
   }).then((country) => {
     console.log(`Successfully inserted Country ${country[0]}`)
   }).catch((error) => {
-    if (error.code === '23505' && error.constraint === 'countries_pkey') {
+    // if (error.code === '23505' && error.constraint === 'countries_pkey') {
+    if (error.code === '23505' && (error.constraint === 'countries_code_unique' || error.constraint === 'countries_pkey' || error.constraint === 'countries_name_unique')) {
       console.log(`Country ${country.countryName} already exists`)
     } else {
       console.log('error', error)
