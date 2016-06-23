@@ -38,6 +38,16 @@ module.exports = [
       // {kickoff: new Date(2016, 5, 22, 09, 00, 00), home: 'HUN', away: 'PRT'},
       // {kickoff: new Date(2016, 5, 22, 12, 00, 00), home: 'ITA', away: 'IRL'},
       // {kickoff: new Date(2016, 5, 22, 12, 00, 00), home: 'SWE', away: 'BEL'}
+      // 1/8 Finals
+      {kickoff: new Date(2016, 5, 25, 06, 00, 00), home: 'CHE', away: 'POL'},
+      {kickoff: new Date(2016, 5, 25, 09, 00, 00), home: 'WAL', away: 'NIR'},
+      {kickoff: new Date(2016, 5, 25, 12, 00, 00), home: 'HRV', away: 'PRT'},
+      {kickoff: new Date(2016, 5, 26, 06, 00, 00), home: 'FRA', away: 'IRL'},
+      {kickoff: new Date(2016, 5, 26, 09, 00, 00), home: 'DEU', away: 'SVK'},
+      {kickoff: new Date(2016, 5, 26, 12, 00, 00), home: 'HUN', away: 'BEL'},
+      {kickoff: new Date(2016, 5, 27, 09, 00, 00), home: 'ITA', away: 'ESP'},
+      {kickoff: new Date(2016, 5, 27, 12, 00, 00), home: 'ENG', away: 'ISL'}
+      // Quarter Finals
     ]
   }, {
     tournament_name: 'COPA AMERICA 2016',
@@ -67,10 +77,17 @@ module.exports = [
       // {kickoff: new Date(2016, 5, 14, 17, 00, 00), home: 'CHL', away: 'PAN'},
       // {kickoff: new Date(2016, 5, 14, 19, 00, 00), home: 'ARG', away: 'BOL'},
       // Quarter Finals
-      {kickoff: new Date(2016, 5, 16, 18, 30, 00), home: 'USA', away: 'ECU'},
-      {kickoff: new Date(2016, 5, 17, 17, 00, 00), home: 'PER', away: 'COL'},
-      {kickoff: new Date(2016, 5, 18, 16, 00, 00), home: 'ARG', away: 'VEN'},
-      {kickoff: new Date(2016, 5, 18, 19, 00, 00), home: 'MEX', away: 'CHL'}
+      // {kickoff: new Date(2016, 5, 16, 18, 30, 00), home: 'USA', away: 'ECU'},
+      // {kickoff: new Date(2016, 5, 17, 17, 00, 00), home: 'PER', away: 'COL'},
+      // {kickoff: new Date(2016, 5, 18, 16, 00, 00), home: 'ARG', away: 'VEN'},
+      // {kickoff: new Date(2016, 5, 18, 19, 00, 00), home: 'MEX', away: 'CHL'}
+      // Semi Finals
+      {kickoff: new Date(2016, 5, 21, 18, 00, 00), home: 'USA', away: 'ARG'},
+      {kickoff: new Date(2016, 5, 22, 17, 00, 00), home: 'COL', away: 'CHL'}
+      // 3rd Place
+      // {kickoff: new Date(2016, 5, 25, 17, 00, 00), home: 'USA', away: ''},
+      // Finals
+      // {kickoff: new Date(2016, 5, 26, 17, 00, 00), home: 'ARG', away: ''},
     ]
   }
 ]
