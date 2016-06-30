@@ -18,6 +18,9 @@ const Tournament = bookshelf.Model.extend({
   },
   participants: function () {
     return this.hasMany('TournamentParticipant')
+  },
+  virtuals: {
+    hasStarted: function () {return this.get('starts_at') < new Date()}
   }
 })
 

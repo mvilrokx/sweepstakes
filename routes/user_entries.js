@@ -12,7 +12,7 @@ const isLoggedIn = (req, res, next) => {
 *  CREATE a new User Entries
 */
 router.get('/new', isLoggedIn, (req, res, next) => {
-  new Tournament().fetchAll()
+  new Tournament().where('starts_at', '>', new Date()).fetchAll()
     .then((tournaments) => {
       res.render('new_user_entry', { isLoggedIn: req.isAuthenticated(), user: req.user, tournaments: tournaments.toJSON()})
     })
@@ -51,12 +51,16 @@ router.put('/:entry_id', isLoggedIn, (req, res, next) => {
 *  DELETE a User Entries
 */
 router.delete('/:entry_id', isLoggedIn, (req, res, next) => {
-  new UserEntry({user_id: req.user.id, id: req.params.entry_id}).destroy()
-    .then(() => {
-      res.redirect('/entries')
-    })
-    .catch((error) => {
-      next(error)
+  new UserEntry({user_id: req.user.id, id: req.params.entry_id})
+    .fetch() // Need to do this to be able to check the tournament start date
+    .then((model) => {
+      model.destroy()
+        .then(() => {
+          res.redirect('/entries')
+        })
+        .catch((error) => {
+          next(error)
+        })
     })
 })
 

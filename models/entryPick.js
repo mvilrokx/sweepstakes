@@ -15,6 +15,21 @@ const EntryPick = bookshelf.Model.extend({
   },
   tournamentParticipant: function () {
     return this.belongsTo('TournamentParticipant')
+  },
+  initialize: function () {
+    this.on('saving', this.beforeSave)
+    this.on('destroying', this.beforeSave)
+  },
+  beforeSave: function () {
+    return this.entry().fetch()
+      .then((entry) => {
+        return entry.tournament().fetch()
+          .then((tournament) => {
+            if (tournament.get('hasStarted')) {
+              throw new Error('Tournament already started, changes not allowed.')
+            }
+          })
+      })
   }
 })
 

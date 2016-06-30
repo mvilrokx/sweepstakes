@@ -16,6 +16,17 @@ const UserEntry = bookshelf.Model.extend({
   },
   picks: function () {
     return this.hasMany('EntryPick')
+  },
+  initialize: function () {
+    this.on('saving', this.beforeSave)
+    this.on('destroying', this.beforeSave)
+  },
+  beforeSave: function () {
+    return this.tournament().fetch().then(function (tournament) {
+      if (tournament.get('starts_at') < new Date()) {
+        throw new Error('Tournament already started, changes not allowed.')
+      }
+    })
   }
 })
 

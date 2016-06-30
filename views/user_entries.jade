@@ -12,12 +12,15 @@ block content
           .col-12.clearfix
             .col.col-10
               a(href='/entries/#{entry.id}') #{entry.name} (#{entry.tournament.name})
-            .col.col-1.col-right.pl1
-              form(action='/entries/#{entry.id}', method='post')
-                input(type='hidden' name='_method' value='delete')
-                input.btn.btn-outline.btn-small.red(type='submit' value='delete')
-            .col.col-1.col-right
-              a.btn.btn-outline.btn-small.green(href='/entries/#{entry.id}') Edit
+            if entry.tournament.hasStarted
+              .col.col-2.col-right.pl1.green.bold Started!
+            else
+              .col.col-1.col-right.pl1
+                form(action='/entries/#{entry.id}', method='post')
+                  input(type='hidden' name='_method' value='delete')
+                  input.btn.btn-outline.btn-small.red(type='submit' value='delete')
+              .col.col-1.col-right
+                a.btn.btn-outline.btn-small.green(href='/entries/#{entry.id}') Edit
           hr
       else
         span You have no entries yet,&nbsp

@@ -4,7 +4,12 @@ block content
   .p2.col-12.sm-col-12.md-col-8.lg-col-6.mx-auto
 
     h1.navy Update Entry
-    p.caps.h6.orange.bold Order determines multiplier so order is important!
+
+    if entry.tournament.hasStarted
+      p.caps.h6.red.bold You cannot make changes to this entry as the #{entry.tournament.name} has already started.
+    else
+      p.caps.h6.orange.bold Order determines multiplier so order is important!
+
 
     .picks.mb2.flex.flex-wrap.content-center
       -var size = '5em'
@@ -29,23 +34,31 @@ block content
               'border-radius': '50%'}).border.border-gray.mx-auto
             form(action='/entries/#{entry.id}/picks/#{pick.id}', method='post')
               input(type='hidden' name='_method' value='delete')
-              input.btn.btn-small.btn-narrow.btn-outline.red(type='submit' value='delete', title='delete')
+              input.btn.btn-small.btn-narrow.btn-outline.red(type='submit' value='delete', title='delete', disabled=entry.tournament.hasStarted)
           else
-            a(href='/entries/#{entry.id}/picks/new?position=#{i+1}', style={
-              width:'#{size}',
-              height:'#{size}',
-              'line-height': '#{size}',
-              'text-align': 'center',
-              'border-radius': '50%'}).border.border-blue.mx-auto Pick ##{i+1}
+            if entry.tournament.hasStarted
+              span(style={
+                width:'#{size}',
+                height:'#{size}',
+                'line-height': '#{size}',
+                'text-align': 'center',
+                'border-radius': '50%'}).border.border-blue.mx-auto Pick ##{i+1}
+            else
+              a(href='/entries/#{entry.id}/picks/new?position=#{i+1}', style={
+                width:'#{size}',
+                height:'#{size}',
+                'line-height': '#{size}',
+                'text-align': 'center',
+                'border-radius': '50%'}).border.border-blue.mx-auto Pick ##{i+1}
 
     form(action='/entries/#{entry.id}', method='POST')
       div
         label.label Your Entry's Name
-        input.input(type='text', name='name', value='#{entry.name}')
+        input.input(type='text', name='name', value='#{entry.name}', disabled=entry.tournament.hasStarted)
         label.label Tournament
         input.input.muted(type='text', name='name', value='#{entry.tournament.name}', disabled=true)
         input(type='hidden' name='_method' value='PUT')
 
       div
-        button.btn.btn-outline.blue(type='submit') Save
+        button.btn.btn-outline.blue(type='submit', disabled=entry.tournament.hasStarted) Save
         a.btn.btn-outline.red(href='/entries').right Cancel
