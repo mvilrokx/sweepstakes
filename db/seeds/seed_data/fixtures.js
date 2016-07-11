@@ -50,13 +50,13 @@ module.exports = [
       // Quarter Finals
       // {kickoff: new Date(2016, 5, 30, 12, 00, 00), home: 'POL', away: 'PRT'},
       // {kickoff: new Date(2016, 6, 01, 12, 00, 00), home: 'WAL', away: 'BEL'}
-      {kickoff: new Date(2016, 6, 02, 12, 00, 00), home: 'DEU', away: 'ITA'},
-      {kickoff: new Date(2016, 6, 03, 12, 00, 00), home: 'FRA', away: 'ISL'},
+      // {kickoff: new Date(2016, 6, 02, 12, 00, 00), home: 'DEU', away: 'ITA'},
+      // {kickoff: new Date(2016, 6, 03, 12, 00, 00), home: 'FRA', away: 'ISL'},
       // Semi Finals
-      {kickoff: new Date(2016, 6, 06, 12, 00, 00), home: 'PRT', away: 'WAL'},
-      {kickoff: new Date(2016, 6, 07, 12, 00, 00), home: 'DEU', away: 'FRA'}
+      // {kickoff: new Date(2016, 6, 06, 12, 00, 00), home: 'PRT', away: 'WAL'},
+      // {kickoff: new Date(2016, 6, 07, 12, 00, 00), home: 'DEU', away: 'FRA'},
       // Finals
-      // {kickoff: new Date(2016, 6, 10, 12, 00, 00), home: 'PRT', away: ''}
+      {kickoff: new Date(2016, 6, 10, 12, 00, 00), home: 'PRT', away: 'FRA'}
     ]
   }, {
     tournament_name: 'COPA AMERICA 2016',
