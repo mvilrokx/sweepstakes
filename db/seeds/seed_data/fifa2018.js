@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'FIFA 2018',
+  name: 'FIFA 2018 WORLD CUP',
   hosts: ['Russia'],
   starts_at: new Date(2018, 6, 14, 12, 00, 00),
   ends_at: new Date(2016, 7, 15, 12, 00, 00),
