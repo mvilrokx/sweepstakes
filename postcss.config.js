@@ -1,18 +1,15 @@
 module.exports = {
-  use: [
-    'postcss-import',
-    'postcss-discard-comments',
-    'postcss-custom-media',
-    'postcss-custom-properties',
-    'postcss-calc',
-    'postcss-nesting',
-    'autoprefixer',
-    'postcss-reporter'
+  plugins: [
+    require('postcss-import'),
+    require('postcss-discard-comments'),
+    require('postcss-custom-media'),
+    require('postcss-custom-properties'),
+    require('postcss-calc'),
+    require('postcss-nesting'),
+    require('autoprefixer')({
+      browsers: '> 5%',
+    }),
+    require('postcss-reporter'),
   ],
-  input: 'src/stylesheets/input.css',
-  output: 'public/stylesheets/style.css',
   'local-plugins': true,
-  autoprefixer: {
-    browsers: '> 5%'
-  }
 }
