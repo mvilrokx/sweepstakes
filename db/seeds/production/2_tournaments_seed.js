@@ -9,16 +9,16 @@ const insertTournament = (knex, Promise, tournament) => {
       name: tournament.name,
       hosts: tournament.hosts,
       starts_at: tournament.starts_at,
-      ends_at: tournament.ends_at
+      ends_at: tournament.ends_at,
     })
     .then(tournament_id => {
-      console.log(`Successfully inserted Tournamanet ${tournament.name}`)
+      console.log(`Successfully inserted Tournament ${tournament.name}`)
       return Promise.map(Object.keys(tournament.groups), groupName => {
         return knex('tournament_groups')
           .returning('id')
           .insert({
             name: groupName,
-            tournament_id: tournament_id[0]
+            tournament_id: tournament_id[0],
           })
           .then(group_id => {
             console.log(
@@ -34,7 +34,7 @@ const insertTournament = (knex, Promise, tournament) => {
                 .insert({
                   country_id: participant,
                   group_id: group_id[0],
-                  tournament_id: tournament_id[0]
+                  tournament_id: tournament_id[0],
                 })
                 .catch(error => {
                   if (
