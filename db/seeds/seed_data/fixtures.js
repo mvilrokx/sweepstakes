@@ -166,22 +166,22 @@ module.exports = [
       // { kickoff: new Date(2018, 6, 28, 11, 00, 00), home: 'ENG', away: 'BEL' },
       // { kickoff: new Date(2018, 6, 28, 11, 00, 00), home: 'PAN', away: 'TUN' },
       // Round of 16
-      { kickoff: new Date(2018, 6, 30, 7, 00, 00), home: 'FRA', away: 'ARG' },
-      { kickoff: new Date(2018, 6, 30, 11, 00, 00), home: 'URY', away: 'PRT' },
+      // { kickoff: new Date(2018, 6, 30, 7, 00, 00), home: 'FRA', away: 'ARG' },
+      // { kickoff: new Date(2018, 6, 30, 11, 00, 00), home: 'URY', away: 'PRT' },
 
-      { kickoff: new Date(2018, 7, 1, 7, 00, 00), home: 'ESP', away: 'RUS' },
-      { kickoff: new Date(2018, 7, 1, 11, 00, 00), home: 'HRV', away: 'DNK' },
+      // { kickoff: new Date(2018, 7, 1, 7, 00, 00), home: 'ESP', away: 'RUS' },
+      // { kickoff: new Date(2018, 7, 1, 11, 00, 00), home: 'HRV', away: 'DNK' },
 
-      { kickoff: new Date(2018, 7, 2, 7, 00, 00), home: 'BRA', away: 'MEX' },
-      { kickoff: new Date(2018, 7, 2, 11, 00, 00), home: 'BEL', away: 'JPN' },
+      // { kickoff: new Date(2018, 7, 2, 7, 00, 00), home: 'BRA', away: 'MEX' },
+      // { kickoff: new Date(2018, 7, 2, 11, 00, 00), home: 'BEL', away: 'JPN' },
 
-      { kickoff: new Date(2018, 7, 3, 7, 00, 00), home: 'SWE', away: 'CHE' },
-      { kickoff: new Date(2018, 7, 3, 11, 00, 00), home: 'COL', away: 'ENG' },
+      // { kickoff: new Date(2018, 7, 3, 7, 00, 00), home: 'SWE', away: 'CHE' },
+      // { kickoff: new Date(2018, 7, 3, 11, 00, 00), home: 'COL', away: 'ENG' },
       // Quarter Finals
       { kickoff: new Date(2018, 7, 6, 7, 00, 00), home: 'URY', away: 'FRA' },
-      // {kickoff: new Date(2018, 6, 17, 17, 00, 00), home: 'PER', away: 'COL'},
-      // {kickoff: new Date(2018, 6, 18, 16, 00, 00), home: 'ARG', away: 'VEN'},
-      // {kickoff: new Date(2018, 6, 18, 19, 00, 00), home: 'MEX', away: 'CHL'}
+      { kickoff: new Date(2018, 7, 6, 11, 00, 00), home: 'BRA', away: 'BEL' },
+      { kickoff: new Date(2018, 7, 7, 7, 00, 00), home: 'SWE', away: 'ENG' },
+      { kickoff: new Date(2018, 7, 7, 11, 00, 00), home: 'RUS', away: 'HRV' },
       // Semi Finals
       // {kickoff: new Date(2018, 6, 21, 18, 00, 00), home: 'USA', away: 'ARG'},
       // {kickoff: new Date(2018, 6, 22, 17, 00, 00), home: 'COL', away: 'CHL'}
