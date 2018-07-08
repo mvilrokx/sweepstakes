@@ -178,17 +178,17 @@ module.exports = [
       // { kickoff: new Date(2018, 7, 3, 7, 00, 00), home: 'SWE', away: 'CHE' },
       // { kickoff: new Date(2018, 7, 3, 11, 00, 00), home: 'COL', away: 'ENG' },
       // Quarter Finals
-      { kickoff: new Date(2018, 7, 6, 7, 00, 00), home: 'URY', away: 'FRA' },
-      { kickoff: new Date(2018, 7, 6, 11, 00, 00), home: 'BRA', away: 'BEL' },
-      { kickoff: new Date(2018, 7, 7, 7, 00, 00), home: 'SWE', away: 'ENG' },
-      { kickoff: new Date(2018, 7, 7, 11, 00, 00), home: 'RUS', away: 'HRV' },
+      // { kickoff: new Date(2018, 7, 6, 7, 00, 00), home: 'URY', away: 'FRA' },
+      // { kickoff: new Date(2018, 7, 6, 11, 00, 00), home: 'BRA', away: 'BEL' },
+      // { kickoff: new Date(2018, 7, 7, 7, 00, 00), home: 'SWE', away: 'ENG' },
+      // { kickoff: new Date(2018, 7, 7, 11, 00, 00), home: 'RUS', away: 'HRV' },
       // Semi Finals
-      // {kickoff: new Date(2018, 6, 21, 18, 00, 00), home: 'USA', away: 'ARG'},
-      // {kickoff: new Date(2018, 6, 22, 17, 00, 00), home: 'COL', away: 'CHL'}
+      { kickoff: new Date(2018, 7, 10, 11, 00, 00), home: 'FRA', away: 'BEL' },
+      { kickoff: new Date(2018, 7, 11, 11, 00, 00), home: 'HRV', away: 'ENG' },
       // 3rd Place
-      // {kickoff: new Date(2018, 6, 25, 17, 00, 00), home: 'USA', away: 'COL'},
+      // {kickoff: new Date(2018, 7, 14, 7, 00, 00), home: 'USA', away: 'COL'},
       // Finals
-      // {kickoff: new Date(2018, 6, 26, 17, 00, 00), home: 'ARG', away: 'CHL'}
+      // {kickoff: new Date(2018, 7, 15, 7, 00, 00), home: 'ARG', away: 'CHL'}
     ],
   },
 ]
