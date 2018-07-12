@@ -183,12 +183,12 @@ module.exports = [
       // { kickoff: new Date(2018, 7, 7, 7, 00, 00), home: 'SWE', away: 'ENG' },
       // { kickoff: new Date(2018, 7, 7, 11, 00, 00), home: 'RUS', away: 'HRV' },
       // Semi Finals
-      { kickoff: new Date(2018, 7, 10, 11, 00, 00), home: 'FRA', away: 'BEL' },
-      { kickoff: new Date(2018, 7, 11, 11, 00, 00), home: 'HRV', away: 'ENG' },
+      // { kickoff: new Date(2018, 7, 10, 11, 00, 00), home: 'FRA', away: 'BEL' },
+      // { kickoff: new Date(2018, 7, 11, 11, 00, 00), home: 'HRV', away: 'ENG' },
       // 3rd Place
-      // {kickoff: new Date(2018, 7, 14, 7, 00, 00), home: 'USA', away: 'COL'},
+      { kickoff: new Date(2018, 7, 14, 7, 00, 00), home: 'FRA', away: 'HRV' },
       // Finals
-      // {kickoff: new Date(2018, 7, 15, 7, 00, 00), home: 'ARG', away: 'CHL'}
+      { kickoff: new Date(2018, 7, 15, 8, 00, 00), home: 'BEL', away: 'ENG' },
     ],
   },
 ]
